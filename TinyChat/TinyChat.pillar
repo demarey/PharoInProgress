@@ -74,7 +74,10 @@ La méthode de classe ==TCMessage class>>from:text:== permet d'instancier un mes
 
 [[[
 TCMessage class >> from: aSender text: aText
-	^ self new sender: aSender; text: aText; yourself
+	^ self new
+		sender: aSender;
+		text: aText;
+		yourself
 ]]]
 
 Le message ==yourself== rend le receveur du message : c'est une manière de s'assurer que le nouvel objet créé sera
@@ -83,7 +86,7 @@ bien retourné par le message ==from:text:== et non le résultat du message ==te
 
 !!! Convertir un message en chaîne de caractères
 Nous ajoutons une méthode ==printOn:== pour transformer le message en une chaîne de caractères.
-Le modèle de la chaîne est sender-separator-text-crlf. Exemple: 'john>hello !!!'.
+Le modèle de la chaîne est sender-promptSeparator-text-crlf. Exemple: 'john>hello !!!'.
 La méthode ==printOn:== est invoquée par la méthode ==printString==. Il est important de comprendre que la méthode ==printOn:== 
 est invoquée par les outils tels que le débogueur ou l'inspecteur d'objets.
 
@@ -91,7 +94,7 @@ est invoquée par les outils tels que le débogueur ou l'inspecteur d'objets.
 TCMessage >> printOn: aStream
 
 	aStream 
-		<< self sender; << separator; 
+		<< self sender; << promptSeparator; 
 		<< self text; << String crlf
 ]]]
 
@@ -111,7 +114,7 @@ TCMessage class >> fromString: aString
 TCMessage >> fromString: aString
 	"Compose a message from a string of this form 'sender>message'."
 	| items |
-	items := aString subStrings: separator.
+	items := aString subStrings: promptSeparator.
 	self sender: items first.
 	self text: items second.
 ]]]
