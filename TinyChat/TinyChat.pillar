@@ -36,14 +36,14 @@ Nous définissons la classe ==TCMessage== dans le package ==TinyChat==.
 
 [[[
 Object subclass: #TCMessage
-	instanceVariableNames: 'sender text separator'
+	instanceVariableNames: 'sender text promptSeparator'
 	classVariableNames: ''
 	category: 'TinyChat'
 ]]]
 Les variables d'instances sont les suivantes:
 - ==sender== : le login de l'expéditeur,
 - ==text== : le texte du message,
-- ==separator== : un caractère séparateur pour l'affichage.
+- ==promptSeparator== : un caractère séparateur pour distinguer le prompt du message.
 
 !!! Créez les accesseurs pour les variables d'instance ==sender== et ==text==
 Nous créons les accesseurs suivants: 
@@ -52,14 +52,14 @@ Nous créons les accesseurs suivants:
 TCMessage >> sender
 	^ sender
 
-TCMessage >> sender: anObject
-	sender := anObject
+TCMessage >> sender: aSender
+	sender := aSender
 
 TCMessage >> text
 	^ text
 
-TCMessage >> text: anObject
-	text := anObject
+TCMessage >> text: aText
+	text := aText
 ]]]
 
 !!! Initialisation de la classe
@@ -67,7 +67,7 @@ La méthode ==initialize== définit la valeur du caractère séparateur.
 [[[
 TCMessage >> initialize
 	super initialize.
-	separator := '>'.
+	promptSeparator := '>'.
 ]]]
 
 La méthode de classe ==TCMessage class>>from:text:== permet d'instancier un message :
